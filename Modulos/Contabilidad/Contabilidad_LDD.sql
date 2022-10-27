@@ -1,5 +1,3 @@
-/*TABLAS DE CONTABILIDAD */
-create database colchoneria;
 use colchoneria;
 /*Tabla Activos - Jonathan Xuyá 0901-18-11371*/
 DROP TABLE IF EXISTS `tbl_ActivosFijos`;  
