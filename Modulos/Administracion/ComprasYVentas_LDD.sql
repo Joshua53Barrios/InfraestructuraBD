@@ -1,8 +1,4 @@
-drop database if exists Modulo_comprasBD;
-create database Modulo_comprasBD;
-use Modulo_comprasBD;
-
-
+use colchoneria;
 
 /*George Mayén 0901-19-11383*/
 create table tblClientes(
@@ -75,13 +71,13 @@ primary key(PkId_CertificacionFacturacion)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*tablas de logistica*//*cambios-------------------------------------------------------------*/
-create table tbl_marca (
+create table tbl_marcacom (
 pk_codigo_marca int not null primary key auto_increment,
 nombre_marca varchar(100)
 )ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
 
 /*tablas de logistica*//*cambios-------------------------------------------------------------*/
-create table tbl_linea (
+create table tbl_lineaCom (
 pk_codigo_linea int not null primary key auto_increment,
 nombre_linea varchar(100)
 )ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
@@ -101,8 +97,8 @@ estado_producto varchar(1),
 ultima_entrada datetime,
 ultima_Salida datetime,
 medidas varchar(25),
-foreign key (fk_marca) references tbl_marca (pk_codigo_marca),
-foreign key (fk_linea_inventario) references tbl_linea (pk_codigo_linea)
+foreign key (fk_marca) references tbl_marcacom (pk_codigo_marca),
+foreign key (fk_linea_inventario) references tbl_lineaCom (pk_codigo_linea)
 )ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
 
 /*George Mayén 0901-19-11383*/
