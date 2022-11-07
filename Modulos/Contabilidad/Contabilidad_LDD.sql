@@ -83,29 +83,24 @@ create table tbl_polizaDetalle(
     Pk_TipoPoliza int not null,
     pkid_cuenta int not null ,
     fechaPoliza date,
-	tbl_cuentas int not null,
 	saldo float,
-	Pk_TipoOperacion int not null, -- debe/haber
-	concepto varchar(65),
-	
+	concepto varchar(65),	
 	primary key(Pk_PolizaEncabezado, 
     Pk_TipoPoliza, 
-    pkid_cuenta),
-    
+    pkid_cuenta),    
     foreign key (Pk_PolizaEncabezado) references tbl_polizaEncabezado (Pk_PolizaEncabezado),
-	foreign key (pkid_cuenta) references tbl_cuentas (pkid_cuenta),
-	foreign key (Pk_TipoOperacion) references tbl_tipoOperacion (Pk_TipoOperacion)
+	foreign key (pkid_cuenta) references tbl_cuentas (pkid_cuenta)
 	
 ) ENGINE = InnoDB DEFAULT CHARSET=latin1;
 
 -- -----------------------Joselyn Rivera------------------------------
 
 CREATE TABLE `Tbl_Moneda` (
-  `KidMoneda` INT NOT NULL,
+  `PKidMoneda` INT NOT NULL,
   `nombre_moneda` VARCHAR(45) NOT NULL,
   `tasa_moneda` DOUBLE NOT NULL,
   `estado` TINYINT(1)  NOT NULL,
-  PRIMARY KEY (`KidMoneda`))
+  PRIMARY KEY (`PKidMoneda`))
 ENGINE = InnoDB;
 
 DROP TABLE IF EXISTS `tbl_areas`;
@@ -302,64 +297,88 @@ CREATE TABLE `tbl_movimiento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
  -- -----------------------Josue Amaya------------------------------
+/* Josue Amaya 0901-19-12421 */
+/* Tabla Cierre Cuentas Activos */
 CREATE TABLE tbl_cierrectasact(
-pkid_ctaAct INT AUTO_INCREMENT NULL,
+pkid_ctaAct INT AUTO_INCREMENT NOT NULL,
+pkid_cuenta int not null,
 nombre_cuenta VARCHAR (50) NOT NULL,
 razon VARCHAR (50) NOT NULL,
 monto FLOAT NOT NULL,
 fecha DATE NOT NULL,
-PRIMARY KEY(pkid_ctaAct),
-FOREIGN KEY (nombre_cuenta) REFERENCES tbl_cuentas (pkid_cuenta) 
+PRIMARY KEY(pkid_ctaAct,
+pkid_cuenta),
+FOREIGN KEY (`pkid_cuenta`) REFERENCES `tbl_cuentas` (`pkid_cuenta`)
 )ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
+/* Josue Amaya 0901-19-12421 */
+/* Tabla Cierre Cuentas Pasivos */
 CREATE TABLE tbl_cierrectaspas(
 pkid_ctaPas INT AUTO_INCREMENT NOT NULL,
+pkid_cuenta int not null,
 nombre_cuenta VARCHAR (50) NOT NULL,
 razon VARCHAR (50) NOT NULL,
 monto FLOAT NOT NULL,
 fecha DATE NOT NULL,
-PRIMARY KEY (pkid_ctaPas),
-FOREIGN KEY (nombre_cuenta) REFERENCES tbl_cuentas (pkid_cuenta) 
+PRIMARY KEY (pkid_ctaPas,
+pkid_cuenta),
+FOREIGN KEY (`pkid_cuenta`) REFERENCES `tbl_cuentas` (`pkid_cuenta`)
 )ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
+/* Josue Amaya 0901-19-12421 */
+/* Tabla Confirmar Cierre Cuentas */
 CREATE TABLE tbl_confctascierrre(
 pkid_confcierre INT AUTO_INCREMENT NOT NULL,
+pkid_cuenta int not null,
 cuenta_nombre VARCHAR(50) NOT NULL,
 total_activo FLOAT NOT NULL,
 total_pasivo FLOAT NOT NULL,
 codigo_contador VARCHAR(20) NOT NULL,
 nombre_contador VARCHAR(50) NOT NULL,
 fecha_cierre DATE,
-PRIMARY KEY (pkid_confcierre),
-FOREIGN KEY (cuenta_nombre) REFERENCES tbl_cuentas (pkid_cuenta) 
+PRIMARY KEY (pkid_confcierre,
+pkid_cuenta),
+FOREIGN KEY (`pkid_cuenta`) REFERENCES `tbl_cuentas` (`pkid_cuenta`)
 )ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
+/* Josue Amaya 0901-19-12421 */
+/* Tabla Cierre Activos */
 CREATE TABLE tbl_cierreAct(
 pkid_cierreA INT AUTO_INCREMENT NOT NULL,
+pkid_cuenta int not null,
 cuenta_nombre VARCHAR(50) NOT NULL,
 monto_total FLOAT NOT NULL,
 fecha_cierre DATE NOT NULL,
-PRIMARY KEY (pkid_cierreA),
-FOREIGN KEY (cuenta_nombre) REFERENCES tbl_cuentas (pkid_cuenta) 
+PRIMARY KEY (pkid_cierreA,
+pkid_cuenta),
+FOREIGN KEY (`pkid_cuenta`) REFERENCES `tbl_cuentas` (`pkid_cuenta`)
 )ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
+/* Josue Amaya 0901-19-12421 */
+/* Tabla Cierre Pasivos */
 CREATE TABLE tbl_cierrePas(
 pkid_cierreP INT AUTO_INCREMENT NOT NULL,
+pkid_cuenta int not null,
 cuenta_nombre VARCHAR(50) NOT NULL,
 monto_total FLOAT NOT NULL,
 fecha_cierre DATE NOT NULL,
-PRIMARY KEY (pkid_cierreP),
-FOREIGN KEY (cuenta_nombre) REFERENCES tbl_cuentas (pkid_cuenta) 
+PRIMARY KEY (pkid_cierreP,
+pkid_cuenta),
+FOREIGN KEY (`pkid_cuenta`) REFERENCES `tbl_cuentas` (`pkid_cuenta`) 
 )ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
+/* Josue Amaya 0901-19-12421 */
+/* Tabla Cierre General */
 CREATE TABLE tbl_cierregeneral(
 pkid_cierreG INT AUTO_INCREMENT NOT NULL,
+pkid_cuenta int not null,
 total_activo FLOAT NOT NULL,
 total_pasivo FLOAT NOT NULL,
 codigo_contador VARCHAR(20) NOT NULL,
 nombre_contador VARCHAR(50) NOT NULL,
 fecha_cierre DATE,
-PRIMARY KEY (pkid_cierreG),
-FOREIGN KEY (codigo_contador) REFERENCES tbl_cuentas (pkid_cuenta) 
+PRIMARY KEY (pkid_cierreG,
+pkid_cuenta),
+FOREIGN KEY (`pkid_cuenta`) REFERENCES `tbl_cuentas` (`pkid_cuenta`)
 )ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
