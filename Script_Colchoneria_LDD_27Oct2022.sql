@@ -1,6 +1,6 @@
 /*BASE DE DATOS COLCHONERÍA*/
-CREATE DATABASE IF NOT EXISTS `prueba`;
-USE `prueba`;
+CREATE DATABASE IF NOT EXISTS `colchoneria`;
+USE `colchoneria`;
 /********************SEGURIDAD********************/
 DROP TABLE IF EXISTS `tbl_modulos`;
 CREATE TABLE IF NOT EXISTS `tbl_modulos` (
