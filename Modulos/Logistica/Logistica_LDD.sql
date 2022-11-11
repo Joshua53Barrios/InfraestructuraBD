@@ -1,6 +1,7 @@
 use colchoneria;
 
 /*Yordi Daniel Hernandez Perez 0901-19-3281*/
+/**/
 create table tbl_marca (
 pk_codigo_marca int not null primary key auto_increment,
 nombre_marca varchar(100),
@@ -104,7 +105,7 @@ tiempo_estimado varchar(100),
 fecha_entrega datetime,
 fk_lote int not null,
 fk_bodega int not null,
-cliente_envio varchar(100),
+cliente varchar(100),
 observaciones_envio varchar(100),
 destino_envio varchar(100),
 foreign key (fk_transporte) references tbl_transporte (pk_codigo_transporte),
